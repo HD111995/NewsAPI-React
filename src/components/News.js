@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class NewsItem extends React.Component {
-   state ={
+
+class NewsItem extends Component {
+    constructor(props) {
+        super(props);
+   this.state ={
        news:[],
        ready:false
    }
-   
+}
     componentDidMount(){
         fetch('https://newsapi.org/v2/top-headlines?country=de&apiKey=c416dea64fe043f892c6d0d64aefd96c')
           .then(response => response.json())
