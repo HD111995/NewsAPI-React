@@ -2,14 +2,17 @@ import React from 'react';
 
 class NewsItem extends React.Component {
    state ={
-       news:[]
+       news:[],
+       ready:false
    }
    
     componentDidMount(){
         fetch('https://newsapi.org/v2/top-headlines?country=de&apiKey=c416dea64fe043f892c6d0d64aefd96c')
           .then(response => response.json())
           .then(data => {
-            this.setState({news : data.articles})
+            this.setState({news : data.articles},() =>{
+                this.setState({ready : true})
+            })
             console.log(data)
         });
             
@@ -17,7 +20,7 @@ class NewsItem extends React.Component {
     render() { 
         return (
             <div className="news-container">
-            {this.state.news.map(elt => 
+            {this.state.ready && this.state.news.map(elt => 
                     <figure>
                         <img src={elt.urlToImage} alt="" />
                     <figcaption>
